@@ -4,6 +4,7 @@
 const cart = document.getElementById('carrito');
 const courses = document.getElementById('lista-cursos');
 const coursesCartList = document.querySelector('#lista-carrito tbody');
+const deleteCartBtn = document.getElementById('vaciar-carrito');
 
 //Add course to cart
 function buyCourse(e) {
@@ -54,6 +55,16 @@ function deleteCourse(e) {
   }
 }
 
+//empty the cart at once in the DOM
+function deleteCart() {
+  /* coursesCartList.innerHTML = ''; //less desirable way */
+
+  while (coursesCartList.firstChild) {
+    coursesCartList.removeChild(coursesCartList.firstChild);
+  }
+}
+
 //listeners
 courses.addEventListener('click', buyCourse);
 cart.addEventListener('click', deleteCourse);
+deleteCartBtn.addEventListener('click', deleteCart);
