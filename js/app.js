@@ -3,8 +3,9 @@
 //variables
 const cart = document.getElementById('carrito');
 const courses = document.getElementById('lista-cursos');
+const coursesCartList = document.querySelector('#lista-carrito tbody');
 
-//function to add course to cart
+//Add course to cart
 function buyCourse(e) {
   e.preventDefault();
   //use delegation to add to cart
@@ -15,7 +16,7 @@ function buyCourse(e) {
   }
 }
 
-//function creates and object with the info of the course
+//creates and object with the info of the course
 function readCourseInfo(course) {
   const courseInfo = {
     imagen: course.querySelector('img').src,
@@ -23,7 +24,24 @@ function readCourseInfo(course) {
     price: course.querySelector('.precio span').textContent,
     id: course.querySelector('a').getAttribute('data-id'),
   };
-  console.log(courseInfo);
+
+  addToCart(courseInfo);
+}
+
+//show the selected course in the cart. We insert the html
+function addToCart(course) {
+  const row = document.createElement('tr'); //table row
+  row.innerHTML = `
+        <td>
+            <img src="${course.imagen}">
+        </td>
+        <td>${course.title}</td>
+        <td>${course.price}</td>
+        <td>
+            <a href="#" class="borrar-curso" data-id="${course.id}">X</a>
+        </td>
+    `;
+  coursesCartList.appendChild(row);
 }
 
 //listeners
