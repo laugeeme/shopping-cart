@@ -43,6 +43,7 @@ function addToCart(course) {
         </td>
     `;
   coursesCartList.appendChild(row);
+  setCourseLocalStorage(course);
 }
 
 //delete course from cart in the DOM
@@ -62,6 +63,28 @@ function deleteCart() {
   while (coursesCartList.firstChild) {
     coursesCartList.removeChild(coursesCartList.firstChild);
   }
+}
+
+//add course to LS
+function setCourseLocalStorage(course) {
+  let courses;
+  //check the result of LS, the result is the list of courses or an empty array.
+  courses = getCourseLocalStorage();
+  //selected course is added to array
+  courses.push(course);
+  localStorage.setItem('courses', JSON.stringify(courses));
+}
+
+//check for courses at localstorage
+function getCourseLocalStorage() {
+  let coursesLS;
+
+  if (localStorage.getItem('courses') === null) {
+    coursesLS = [];
+  } else {
+    coursesLS = JSON.parse(localStorage.getItem('courses'));
+  }
+  return coursesLS;
 }
 
 //listeners
