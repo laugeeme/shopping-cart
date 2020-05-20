@@ -51,9 +51,14 @@ function deleteCourse(e) {
   e.preventDefault();
 
   let course;
+  let courseId;
   if (e.target.classList.contains('borrar-curso')) {
     e.target.parentElement.parentElement.remove();
+    course = e.target.parentElement.parentElement;
+    courseId = course.querySelector('a').getAttribute('data-id');
   }
+
+  deleteCourseLocalStorage(courseId);
 }
 
 //empty the cart at once in the DOM
@@ -107,6 +112,19 @@ function readLocalStorage() {
       `;
     coursesCartList.appendChild(row);
   });
+}
+
+//delete course with the id from LS
+function deleteCourseLocalStorage(course, index) {
+  let coursesLS;
+  coursesLS = getCourseLocalStorage();
+
+  coursesLS.forEach(function (courseLS) {
+    if (courseLS.id === course) {
+      coursesLS.splice(index, 1);
+    }
+  });
+  localStorage.setItem('courses', JSON.stringify(coursesLS));
 }
 
 //listeners
