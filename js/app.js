@@ -44,5 +44,16 @@ function addToCart(course) {
   coursesCartList.appendChild(row);
 }
 
+//delete course from cart in the DOM
+function deleteCourse(e) {
+  e.preventDefault();
+
+  let course;
+  if (e.target.classList.contains('borrar-curso')) {
+    e.target.parentElement.parentElement.remove();
+  }
+}
+
 //listeners
 courses.addEventListener('click', buyCourse);
+cart.addEventListener('click', deleteCourse);
