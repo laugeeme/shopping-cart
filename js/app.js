@@ -87,7 +87,30 @@ function getCourseLocalStorage() {
   return coursesLS;
 }
 
+//print courses from LS in the cart
+function readLocalStorage() {
+  let coursesLS;
+
+  coursesLS = getCourseLocalStorage();
+
+  coursesLS.forEach(function (course) {
+    const row = document.createElement('tr'); //table row
+    row.innerHTML = `
+          <td>
+              <img src="${course.imagen}">
+          </td>
+          <td>${course.title}</td>
+          <td>${course.price}</td>
+          <td>
+              <a href="#" class="borrar-curso" data-id="${course.id}">X</a>
+          </td>
+      `;
+    coursesCartList.appendChild(row);
+  });
+}
+
 //listeners
 courses.addEventListener('click', buyCourse);
 cart.addEventListener('click', deleteCourse);
 deleteCartBtn.addEventListener('click', deleteCart);
+document.addEventListener('DOMContentLoaded', readLocalStorage);
