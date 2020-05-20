@@ -68,6 +68,8 @@ function deleteCart() {
   while (coursesCartList.firstChild) {
     coursesCartList.removeChild(coursesCartList.firstChild);
   }
+
+  deleteAllLocalStorage();
 }
 
 //add course to LS
@@ -125,6 +127,11 @@ function deleteCourseLocalStorage(course, index) {
     }
   });
   localStorage.setItem('courses', JSON.stringify(coursesLS));
+}
+
+//delete LS when empty car
+function deleteAllLocalStorage() {
+  localStorage.clear();
 }
 
 //listeners
